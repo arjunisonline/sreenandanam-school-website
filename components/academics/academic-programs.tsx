@@ -1,18 +1,35 @@
-"use client"
+"use client";
 
-import { useEffect, useState, useRef } from "react"
-import { Baby, BookOpen, GraduationCap, ArrowRight } from "lucide-react"
-import Link from "next/link"
-import { cn } from "@/lib/utils"
+import { useEffect, useState, useRef } from "react";
+import { Baby, BookOpen, GraduationCap, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 const programs = [
+  {
+    id: "cuddle-care",
+    icon: Baby,
+    title: "Cuddle Care",
+    grades: "Day Care",
+    ageGroup: "9 months to 3 years",
+    description:
+      "A safe, nurturing haven for your little ones aged 9 months to 3 years. Our Cuddle Care program provides a warm, stimulating environment where children feel secure and happy while being looked after by trained caregivers.",
+    highlights: [
+      "Safe, supervised play areas",
+      "Healthy meal options",
+      "Nap and rest facilities",
+      "Basic hygiene and care",
+      "Trained and caring staff",
+    ],
+  },
   {
     id: "pre-primary",
     icon: Baby,
     title: "Pre-Primary Section",
     grades: "Nursery to UKG",
     ageGroup: "Ages 3-5",
-    description: "A nurturing environment where young learners begin their educational journey through play-based learning, creative activities, and foundational skill development.",
+    description:
+      "A nurturing environment where young learners begin their educational journey through play-based learning, creative activities, and foundational skill development.",
     highlights: [
       "Play-based learning approach",
       "Basic literacy and numeracy",
@@ -20,15 +37,15 @@ const programs = [
       "Social skill development",
       "Physical activities and games",
     ],
-    teachers: 4,
   },
   {
     id: "primary",
     icon: BookOpen,
     title: "Primary Education",
-    grades: "Class 1 to Class 5",
-    ageGroup: "Ages 6-10",
-    description: "Building strong foundations in core subjects while fostering curiosity, creativity, and a love for learning through interactive teaching methods.",
+    grades: "Class 1 to Class 7",
+    ageGroup: "Ages 6-12",
+    description:
+      "Building strong foundations in core subjects while fostering curiosity, creativity, and a love for learning through interactive teaching methods.",
     highlights: [
       "English, Mathematics, Science",
       "Social Studies and Languages",
@@ -36,46 +53,29 @@ const programs = [
       "Art and physical education",
       "Value education",
     ],
-    teachers: 5,
   },
-  {
-    id: "upper-primary",
-    icon: GraduationCap,
-    title: "Upper Primary Education",
-    grades: "Class 6 to Class 7",
-    ageGroup: "Ages 11-12",
-    description: "Preparing students for higher education with advanced concepts, critical thinking skills, and comprehensive subject knowledge.",
-    highlights: [
-      "Advanced Mathematics and Science",
-      "Language proficiency",
-      "Computer-aided learning",
-      "Project-based learning",
-      "Exam preparation",
-    ],
-    teachers: 2,
-  },
-]
+];
 
 export function AcademicPrograms() {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
-    )
+      { threshold: 0.1 },
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section ref={sectionRef} className="py-16 md:py-24 bg-card">
@@ -85,7 +85,9 @@ export function AcademicPrograms() {
           <p
             className={cn(
               "text-primary font-medium mb-2 transition-all duration-700",
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4",
             )}
           >
             Our Programs
@@ -93,7 +95,9 @@ export function AcademicPrograms() {
           <h2
             className={cn(
               "font-serif text-3xl md:text-4xl font-bold text-foreground mb-4 transition-all duration-700 delay-100",
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4",
             )}
           >
             Academic Levels
@@ -101,10 +105,12 @@ export function AcademicPrograms() {
           <p
             className={cn(
               "text-muted-foreground max-w-2xl mx-auto transition-all duration-700 delay-200",
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4",
             )}
           >
-            From pre-primary to upper primary, we offer comprehensive education 
+            From pre-primary to upper primary, we offer comprehensive education
             tailored to each age group's developmental needs.
           </p>
         </div>
@@ -117,7 +123,9 @@ export function AcademicPrograms() {
               id={program.id}
               className={cn(
                 "group bg-background rounded-2xl border border-border overflow-hidden transition-all duration-700 hover:shadow-lg",
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4",
               )}
               style={{ transitionDelay: `${(index + 3) * 100}ms` }}
             >
@@ -132,17 +140,17 @@ export function AcademicPrograms() {
                   </h3>
                   <div className="space-y-1 mb-4">
                     <p className="text-primary font-medium">{program.grades}</p>
-                    <p className="text-muted-foreground text-sm">{program.ageGroup}</p>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span className="font-medium text-foreground">{program.teachers}</span>
-                    <span>Dedicated Teachers</span>
+                    <p className="text-muted-foreground text-sm">
+                      {program.ageGroup}
+                    </p>
                   </div>
                 </div>
 
                 {/* Middle - Description */}
                 <div className="md:px-2">
-                  <h4 className="font-semibold text-foreground mb-3">Overview</h4>
+                  <h4 className="font-semibold text-foreground mb-3">
+                    Overview
+                  </h4>
                   <p className="text-muted-foreground leading-relaxed">
                     {program.description}
                   </p>
@@ -150,7 +158,9 @@ export function AcademicPrograms() {
 
                 {/* Right - Highlights */}
                 <div>
-                  <h4 className="font-semibold text-foreground mb-3">Key Features</h4>
+                  <h4 className="font-semibold text-foreground mb-3">
+                    Key Features
+                  </h4>
                   <ul className="space-y-2">
                     {program.highlights.map((highlight) => (
                       <li
@@ -169,5 +179,5 @@ export function AcademicPrograms() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -16,6 +16,7 @@ export default function ContactPage() {
           title="Contact Us"
           subtitle="We'd love to hear from you. Get in touch with us for admissions, inquiries, or feedback."
           backgroundPattern="contact"
+          image="/images/sports.jpg"
         />
         <ContactInfo />
         <ContactForm />

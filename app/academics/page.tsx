@@ -20,6 +20,7 @@ export default function AcademicsPage() {
           breadcrumb="Home / Academics"
           title="Academic Programs"
           description="Comprehensive education from pre-primary to upper primary, designed to build strong foundations and nurture curious minds."
+          image="/images/classroom.jpg"
         />
         <AcademicPrograms />
         <TeachingMethodology />

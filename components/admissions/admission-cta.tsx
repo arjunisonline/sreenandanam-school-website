@@ -1,31 +1,31 @@
-"use client"
+"use client";
 
-import { useEffect, useState, useRef } from "react"
-import Link from "next/link"
-import { Phone, Mail, MapPin, Clock } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import { useEffect, useState, useRef } from "react";
+import Link from "next/link";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export function AdmissionCTA() {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
-    )
+      { threshold: 0.1 },
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section ref={sectionRef} className="py-16 md:py-24 bg-secondary/30">
@@ -34,7 +34,9 @@ export function AdmissionCTA() {
           <div
             className={cn(
               "bg-card rounded-2xl border border-border p-8 md:p-12 transition-all duration-700",
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4",
             )}
           >
             <div className="text-center mb-10">
@@ -42,8 +44,8 @@ export function AdmissionCTA() {
                 Ready to Apply?
               </h2>
               <p className="text-muted-foreground max-w-xl mx-auto">
-                Visit our school office to collect the admission form and begin 
-                your child's educational journey with us. We're here to help you 
+                Visit our school office to collect the admission form and begin
+                your child's educational journey with us. We're here to help you
                 every step of the way.
               </p>
             </div>
@@ -53,35 +55,47 @@ export function AdmissionCTA() {
               <div
                 className={cn(
                   "flex items-start gap-4 p-4 bg-background rounded-xl transition-all duration-500 delay-100",
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                  isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-4",
                 )}
               >
                 <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
                   <MapPin className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-foreground mb-1">School Address</h4>
+                  <h4 className="font-semibold text-foreground mb-1">
+                    Address
+                  </h4>
                   <p className="text-sm text-muted-foreground">
-                    Parassala, Thiruvananthapuram,<br />
-                    Kerala, India
+                    Sree Nandanam Kindergarten, <br /> Near Mahadeva Temple
+                    ,Parassala,
+                    <br />
+                    Thiruvananthapuram, Kerala, India
                   </p>
                 </div>
               </div>
 
               <div
                 className={cn(
-                  "flex items-start gap-4 p-4 bg-background rounded-xl transition-all duration-500 delay-200",
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                  "flex items-start gap-4 p-4 bg-background rounded-xl transition-all duration-500 delay-100",
+                  isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-4",
                 )}
               >
                 <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
-                  <Clock className="w-5 h-5 text-primary" />
+                  <MapPin className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-foreground mb-1">Office Hours</h4>
+                  <h4 className="font-semibold text-foreground mb-1">
+                    Address
+                  </h4>
                   <p className="text-sm text-muted-foreground">
-                    Monday - Saturday<br />
-                    9:00 AM - 3:00 PM
+                    Sree Nandanam Schools, <br /> Near KSRTC Depot, Kurumkutty,
+                    Parassala,
+                    <br />
+                    Thiruvananthapuram, Kerala, India
                   </p>
                 </div>
               </div>
@@ -89,24 +103,47 @@ export function AdmissionCTA() {
               <div
                 className={cn(
                   "flex items-start gap-4 p-4 bg-background rounded-xl transition-all duration-500 delay-300",
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                  isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-4",
                 )}
               >
                 <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
                   <Phone className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-foreground mb-1">Phone</h4>
-                  <p className="text-sm text-muted-foreground">
-                    +91 XXXXX XXXXX
-                  </p>
+                  <h4 className="font-semibold text-foreground mb-1">
+                    Telephone
+                  </h4>
+                  <p className="text-sm text-muted-foreground">+0471 2202698</p>
+                </div>
+              </div>
+
+              <div
+                className={cn(
+                  "flex items-start gap-4 p-4 bg-background rounded-xl transition-all duration-500 delay-300",
+                  isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-4",
+                )}
+              >
+                <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
+                  <Phone className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-foreground mb-1">
+                    Telephone
+                  </h4>
+                  <p className="text-sm text-muted-foreground">+0471 2201497</p>
                 </div>
               </div>
 
               <div
                 className={cn(
                   "flex items-start gap-4 p-4 bg-background rounded-xl transition-all duration-500 delay-400",
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                  isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-4",
                 )}
               >
                 <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
@@ -119,19 +156,48 @@ export function AdmissionCTA() {
                   </p>
                 </div>
               </div>
+              <div
+                className={cn(
+                  "flex items-start gap-4 p-4 bg-background rounded-xl transition-all duration-500 delay-200",
+                  isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-4",
+                )}
+              >
+                <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
+                  <Clock className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-foreground mb-1">
+                    Office Hours
+                  </h4>
+                  <p className="text-sm text-muted-foreground">
+                    Monday - Saturday
+                    <br />
+                    9:00 AM - 3:00 PM
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* CTA Buttons */}
             <div
               className={cn(
                 "flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-700 delay-500",
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4",
               )}
             >
               <Button asChild size="lg" className="w-full sm:w-auto">
                 <Link href="/contact">Contact Us</Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="w-full sm:w-auto"
+              >
                 <Link href="/about">Learn More About Us</Link>
               </Button>
             </div>
@@ -140,15 +206,15 @@ export function AdmissionCTA() {
             <p
               className={cn(
                 "mt-8 text-center text-sm text-muted-foreground transition-all duration-700 delay-600",
-                isVisible ? "opacity-100" : "opacity-0"
+                isVisible ? "opacity-100" : "opacity-0",
               )}
             >
-              Online admission portal coming soon. For now, please visit the school 
-              office in person to complete the admission process.
+              Online admission portal coming soon. For now, please visit the
+              school office in person to complete the admission process.
             </p>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

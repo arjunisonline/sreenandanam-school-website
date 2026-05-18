@@ -1,25 +1,25 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Menu, X, GraduationCap } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import { useState } from "react";
+import Link from "next/link";
+import { Menu, X, GraduationCap } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About Us" },
   { href: "/academics", label: "Academics" },
   { href: "/facilities", label: "Facilities" },
-  { href: "/faculty", label: "Faculty" },
   { href: "/admissions", label: "Admissions" },
   { href: "/gallery", label: "Gallery" },
   { href: "/news", label: "News" },
+  { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact" },
-]
+];
 
 export function Navigation() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
@@ -27,15 +27,7 @@ export function Navigation() {
         <nav className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 md:w-12 md:h-12 bg-primary rounded-full flex items-center justify-center transition-transform group-hover:scale-105">
-              <GraduationCap className="w-5 h-5 md:w-6 md:h-6 text-primary-foreground" />
-            </div>
-            <div className="hidden sm:block">
-              <p className="font-serif text-lg md:text-xl font-semibold text-foreground leading-tight">
-                Sree Nandanam
-              </p>
-              <p className="text-xs text-muted-foreground">Public School</p>
-            </div>
+            <img src="/images/logo.png" alt="Logo" width={150} height={150} />
           </Link>
 
           {/* Desktop Navigation */}
@@ -72,7 +64,7 @@ export function Navigation() {
         <div
           className={cn(
             "lg:hidden overflow-hidden transition-all duration-300 ease-in-out",
-            isOpen ? "max-h-[500px] pb-4" : "max-h-0"
+            isOpen ? "max-h-[500px] pb-4" : "max-h-0",
           )}
         >
           <div className="flex flex-col gap-1 pt-2 border-t border-border">
@@ -95,5 +87,5 @@ export function Navigation() {
         </div>
       </div>
     </header>
-  )
+  );
 }

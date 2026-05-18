@@ -18,9 +18,9 @@ const contactDetails = [
   },
   {
     icon: MapPin,
-    title: "Address",
-    details: ["Sree Nandanam Public School", "Parassala, Thiruvananthapuram", "Kerala - 695502"],
-    description: "Visit us anytime"
+    title: "Campuses",
+    details: ["Public School: Near Parassala Junction", "Kindergarten: Parassala Town"],
+    description: "Visit us at either branch"
   },
   {
     icon: Clock,

@@ -14,26 +14,48 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'SREE NANDANAM PUBLIC SCHOOL | Quality Education in Parassala, Kerala',
-  description: 'SREE NANDANAM PUBLIC SCHOOL offers quality primary and upper primary education in Parassala, Thiruvananthapuram, Kerala. Established in 2003, we provide English medium education with modern computer-aided learning facilities.',
-  keywords: ['school', 'education', 'Kerala', 'Parassala', 'Thiruvananthapuram', 'primary school', 'English medium'],
-  generator: 'v0.app',
+  title: {
+    default: 'SREE NANDANAM PUBLIC SCHOOL | Quality Education in Parassala, Kerala',
+    template: '%s | SREE NANDANAM PUBLIC SCHOOL'
+  },
+  description: 'SREE NANDANAM PUBLIC SCHOOL offers quality primary and upper primary education in Parassala, Thiruvananthapuram, Kerala. Established in 2008, we provide English medium education with modern computer-aided learning facilities.',
+  keywords: ['Sree Nandanam Public School', 'education', 'Kerala', 'Parassala', 'Thiruvananthapuram', 'primary school', 'upper primary', 'English medium', 'best school in parassala'],
+  authors: [{ name: 'Sree Nandanam Public School' }],
+  creator: 'Sree Nandanam Public School',
+  publisher: 'Sree Nandanam Public School',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://sreenandanam.edu'),
   icons: {
     icon: [
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
       {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
+        rel: 'mask-icon',
+        url: '/android-chrome-512x512.png',
       },
     ],
-    apple: '/apple-icon.png',
+  },
+  openGraph: {
+    title: 'SREE NANDANAM PUBLIC SCHOOL | Parassala, Kerala',
+    description: 'Empowering students through quality education since 2008. Explore our campus, facilities, and academic excellence.',
+    url: 'https://sreenandanam.edu',
+    siteName: 'Sree Nandanam Public School',
+    locale: 'en_IN',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'SREE NANDANAM PUBLIC SCHOOL',
+    description: 'Empowering students through quality education since 2008 in Parassala, Kerala.',
   },
 }
 

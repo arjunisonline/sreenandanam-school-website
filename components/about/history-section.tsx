@@ -1,57 +1,62 @@
-"use client"
+"use client";
 
-import { useEffect, useState, useRef } from "react"
-import { Calendar, MapPin, Users, Award } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { useEffect, useState, useRef } from "react";
+import { Calendar, MapPin, Users, Award } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const milestones = [
   {
-    year: "2003",
+    year: "2008",
     title: "School Founded",
-    description: "Sree Nandanam Public School was established with a vision to provide quality English medium education in rural Parassala.",
+    description:
+      "Sree Nandanam Public School was established with a vision to provide quality English medium education in rural Parassala.",
   },
   {
-    year: "2005",
+    year: "2012",
     title: "Pre-Primary Section Added",
-    description: "Expanded our offerings to include a pre-primary section, providing early childhood education.",
-  },
-  {
-    year: "2010",
-    title: "Computer Lab Established",
-    description: "Introduced computer-aided learning with a dedicated lab to prepare students for the digital age.",
+    description:
+      "Expanded our offerings to include a pre-primary section, providing early childhood education.",
   },
   {
     year: "2015",
-    title: "Infrastructure Expansion",
-    description: "Added new classrooms and activity rooms to accommodate growing student enrollment.",
+    title: "Computer Lab Established",
+    description:
+      "Introduced computer-aided learning with a dedicated lab to prepare students for the digital age.",
   },
   {
-    year: "2020",
-    title: "20+ Years of Excellence",
-    description: "Celebrated over two decades of commitment to education and community service.",
+    year: "2018",
+    title: "Infrastructure Expansion",
+    description:
+      "Added new classrooms and activity rooms to accommodate growing student enrollment.",
   },
-]
+  {
+    year: "2023",
+    title: "15+ Years of Excellence",
+    description:
+      "Celebrated fifteen years of commitment to education and community service.",
+  },
+];
 
 export function HistorySection() {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
-    )
+      { threshold: 0.1 },
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section ref={sectionRef} className="py-16 md:py-24 bg-card">
@@ -62,7 +67,9 @@ export function HistorySection() {
             <h2
               className={cn(
                 "font-serif text-3xl md:text-4xl font-bold text-foreground mb-6 transition-all duration-700",
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4",
               )}
             >
               Our History
@@ -70,22 +77,24 @@ export function HistorySection() {
             <div
               className={cn(
                 "space-y-4 text-muted-foreground leading-relaxed transition-all duration-700 delay-100",
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4",
               )}
             >
               <p>
-                Sree Nandanam Public School was established in 2003 in the rural 
-                area of Parassala block in Thiruvananthapuram district, Kerala. 
-                Founded with a vision to provide accessible, quality education 
-                to children in the community, our school has grown to become a 
-                trusted institution for primary and upper primary education.
+                Sree Nandanam Public School was established in 2008 in the rural
+                area of Parassala block in Thiruvananthapuram district, Kerala.
+                Founded with a vision to provide accessible, quality education
+                to children in the community, our school has grown to become a
+                trusted institution for Kindergarten and primary education.
               </p>
               <p>
-                Over the years, we have continuously improved our facilities and 
-                teaching methodologies to ensure that every student receives the 
-                best possible foundation for their future. Our commitment to 
-                excellence in education has made us a preferred choice for parents 
-                seeking quality English medium schooling.
+                Over the years, we have continuously improved our facilities and
+                teaching methodologies to ensure that every student receives the
+                best possible foundation for their future. Our commitment to
+                excellence in education has made us a preferred choice for
+                parents seeking quality English medium schooling.
               </p>
             </div>
 
@@ -93,7 +102,9 @@ export function HistorySection() {
             <div
               className={cn(
                 "grid grid-cols-2 gap-4 mt-8 transition-all duration-700 delay-200",
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4",
               )}
             >
               <div className="flex items-center gap-3 p-4 bg-background rounded-xl border border-border">
@@ -101,7 +112,7 @@ export function HistorySection() {
                   <Calendar className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <p className="font-semibold text-foreground">Est. 2003</p>
+                  <p className="font-semibold text-foreground">Est. 2008</p>
                   <p className="text-sm text-muted-foreground">Founded</p>
                 </div>
               </div>
@@ -139,7 +150,9 @@ export function HistorySection() {
           <div
             className={cn(
               "transition-all duration-700 delay-300",
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4",
             )}
           >
             <h3 className="font-serif text-2xl font-semibold text-foreground mb-8">
@@ -156,7 +169,9 @@ export function HistorySection() {
                     key={milestone.year}
                     className={cn(
                       "relative flex gap-6 transition-all duration-500",
-                      isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4"
+                      isVisible
+                        ? "opacity-100 translate-x-0"
+                        : "opacity-0 translate-x-4",
                     )}
                     style={{ transitionDelay: `${(index + 4) * 100}ms` }}
                   >
@@ -183,7 +198,64 @@ export function HistorySection() {
             </div>
           </div>
         </div>
+
+        {/* Famous Visitors Section */}
+        <div className="mt-24">
+          <div className="text-center mb-12">
+            <h2
+              className={cn(
+                "font-serif text-3xl md:text-4xl font-bold text-foreground mb-4 transition-all duration-700",
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4",
+              )}
+            >
+              Famous Visitors
+            </h2>
+            <p
+              className={cn(
+                "text-muted-foreground max-w-2xl mx-auto transition-all duration-700 delay-100",
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4",
+              )}
+            >
+              Over the years, we have been honored to host several distinguished personalities who have inspired our students and staff.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[1, 2, 3].map((item, index) => (
+              <div
+                key={item}
+                className={cn(
+                  "bg-background rounded-2xl overflow-hidden border border-border hover:shadow-lg hover:border-primary/30 transition-all duration-500 group",
+                  isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-4",
+                )}
+                style={{ transitionDelay: `${(index + 2) * 100}ms` }}
+              >
+                <div className="aspect-[4/3] bg-muted relative overflow-hidden flex items-center justify-center">
+                  {/* Placeholder for visitor photo */}
+                  <Users className="w-12 h-12 text-muted-foreground/30" />
+                </div>
+                <div className="p-6">
+                  <h3 className="font-serif text-xl font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
+                    Notable Personality {item}
+                  </h3>
+                  <p className="text-sm text-primary font-medium mb-3">
+                    Designation / Title
+                  </p>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    Visited our school and interacted with the students, sharing inspiring stories and valuable life lessons.
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
-  )
+  );
 }
