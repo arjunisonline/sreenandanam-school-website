@@ -7,7 +7,7 @@ const contactDetails = [
   {
     icon: Phone,
     title: "Phone",
-    details: ["+91 471 2201234", "+91 94470 12345"],
+    details: ["+0471 2202698", "+0471 2201497"],
     description: "Call us during school hours"
   },
   {
@@ -19,7 +19,7 @@ const contactDetails = [
   {
     icon: MapPin,
     title: "Campuses",
-    details: ["Public School: Near Parassala Junction", "Kindergarten: Parassala Town"],
+    details: ["Public School: Near KSRTC Depot, Kurumkutty", "Kindergarten: Near Mahadeva Temple ,Parassala,"],
     description: "Visit us at either branch"
   },
   {
@@ -39,15 +39,15 @@ export function ContactInfo() {
             Get In Touch
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-pretty">
-            Have questions about admissions, academics, or our programs? 
+            Have questions about admissions, academics, or our programs?
             Reach out to us through any of the channels below.
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {contactDetails.map((item, index) => (
-            <Card 
-              key={index} 
+            <Card
+              key={index}
               className="group hover:shadow-lg transition-all duration-300 border-border/50 hover:border-primary/30"
             >
               <CardContent className="p-6 text-center">

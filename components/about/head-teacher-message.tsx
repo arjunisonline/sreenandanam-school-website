@@ -168,7 +168,7 @@ export function HeadTeacherMessage() {
                 <User className="w-12 h-12 text-muted-foreground/30" />
               </div>
               <h3 className="font-serif text-xl font-semibold text-foreground mb-1">
-                Head Teacher Name
+                BINU PRABHA.P.T
               </h3>
               <p className="text-sm text-muted-foreground mb-3">Qualifications</p>
               <div className="px-4 py-1.5 bg-primary/10 rounded-full">

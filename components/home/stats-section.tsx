@@ -131,12 +131,12 @@ export function StatsSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="flex flex-wrap justify-center gap-6 md:gap-8">
           {stats.map((stat, index) => (
             <div
               key={stat.label}
               className={cn(
-                "group relative bg-background rounded-2xl p-6 md:p-8 border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-500",
+                "group relative bg-background rounded-2xl p-6 md:p-8 border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-500 w-full sm:w-64 md:w-72",
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-4",

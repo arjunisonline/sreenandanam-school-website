@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { GraduationCap, MapPin, Phone, Mail, Clock } from "lucide-react";
+import { GraduationCap, MapPin, Phone, Mail, Clock, Facebook, Instagram, Youtube } from "lucide-react";
 
 const quickLinks = [
   { href: "/about", label: "About Us" },
@@ -27,9 +27,39 @@ export function Footer() {
               medium education for students from Class 1 to Class 7 in a
               supportive learning environment.
             </p>
-            <p className="text-xs text-background/60">
+            <p className="text-xs text-background/60 mb-6">
               UDISE Code: 32140900331
             </p>
+            {/* Social Links */}
+            <div className="flex items-center gap-3">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-background/10 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-300"
+                aria-label="Facebook"
+              >
+                <Facebook className="w-4.5 h-4.5" />
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-background/10 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-300"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-4.5 h-4.5" />
+              </a>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-background/10 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-300"
+                aria-label="YouTube"
+              >
+                <Youtube className="w-4.5 h-4.5" />
+              </a>
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -65,17 +95,25 @@ export function Footer() {
                   Kerala, India
                 </span>
               </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-primary shrink-0" />
-                <span className="text-sm text-background/80">
-                  +91 XXXXX XXXXX
-                </span>
+              <li className="flex items-start gap-3">
+                <Phone className="w-4 h-4 mt-1 text-primary shrink-0" />
+                <div className="flex flex-col text-sm text-background/80">
+                  <a href="tel:+919745433356" className="hover:text-primary transition-colors">
+                    +91 97454 33356
+                  </a>
+                  <a href="tel:+919745433357" className="hover:text-primary transition-colors">
+                    +91 97454 33357
+                  </a>
+                </div>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-primary shrink-0" />
-                <span className="text-sm text-background/80">
-                  info@sreenandanam.edu
-                </span>
+                <a
+                  href="mailto:sreenandadnamschools@gmail.com"
+                  className="text-sm text-background/80 hover:text-primary transition-colors truncate"
+                >
+                  sreenandadnamschools@gmail.com
+                </a>
               </li>
               <li className="flex items-center gap-3">
                 <Clock className="w-4 h-4 text-primary shrink-0" />
@@ -84,6 +122,29 @@ export function Footer() {
                 </span>
               </li>
             </ul>
+          </div>
+
+          {/* Newsletter / Updates */}
+          <div>
+            <h3 className="font-serif text-lg font-semibold mb-4">
+              Stay Updated
+            </h3>
+            <p className="text-background/80 text-sm leading-relaxed mb-4">
+              Subscribe to receive the latest updates, calendar announcements, and event notifications.
+            </p>
+            <div className="flex flex-col gap-2">
+              <input
+                type="email"
+                placeholder="Your email address"
+                className="px-4 py-2 bg-background/10 border border-background/20 rounded-md text-sm text-white placeholder:text-background/40 focus:outline-none focus:border-primary transition-colors"
+              />
+              <button
+                type="button"
+                className="px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/95 transition-colors"
+              >
+                Subscribe
+              </button>
+            </div>
           </div>
         </div>
 

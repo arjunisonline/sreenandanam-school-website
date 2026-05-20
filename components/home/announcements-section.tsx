@@ -6,73 +6,61 @@ import { Bell, Calendar, ArrowRight, Clock } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-const announcements = [
-  {
-    id: 1,
-    title: "Admissions Open for Academic Year 2026-27",
-    date: "March 15, 2026",
-    category: "Admissions",
-    description: "Applications are now being accepted for Class 1 to Class 7. Limited seats available. Apply early to secure your child's admission.",
-    isNew: true,
-  },
-  {
-    id: 2,
-    title: "Annual Sports Day Celebration",
-    date: "March 20, 2026",
-    category: "Events",
-    description: "Join us for our Annual Sports Day featuring various athletic events, games, and performances by our talented students.",
-    isNew: true,
-  },
-  {
-    id: 3,
-    title: "Parent-Teacher Meeting Scheduled",
-    date: "March 25, 2026",
-    category: "Notice",
-    description: "Parents are requested to attend the PTM to discuss their ward's academic progress and upcoming activities.",
-    isNew: false,
-  },
-]
+interface NewsItem {
+  id: string
+  title: string
+  category: string
+  excerpt: string
+  is_new: boolean
+  published_at: string
+}
 
-const upcomingEvents = [
-  {
-    id: 1,
-    title: "Science Exhibition",
-    date: "April 5, 2026",
-    time: "10:00 AM",
-  },
-  {
-    id: 2,
-    title: "Independence Day Celebration",
-    date: "August 15, 2026",
-    time: "9:00 AM",
-  },
-  {
-    id: 3,
-    title: "Annual Day Function",
-    date: "December 15, 2026",
-    time: "4:00 PM",
-  },
-]
+interface Event {
+  id: string
+  title: string
+  event_date: string
+  event_time: string
+}
+
+function formatTime(timeStr: string) {
+  const [h, m] = timeStr.split(":").map(Number)
+  const ampm = h >= 12 ? "PM" : "AM"
+  const hour = h % 12 || 12
+  return `${hour}:${String(m).padStart(2, "0")} ${ampm}`
+}
 
 export function AnnouncementsSection() {
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
 
+  const [announcements, setAnnouncements] = useState<NewsItem[]>([])
+  const [events, setEvents] = useState<Event[]>([])
+  const [newsLoading, setNewsLoading] = useState(true)
+  const [eventsLoading, setEventsLoading] = useState(true)
+
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true) },
       { threshold: 0.1 }
     )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    // Fetch latest 3 news items
+    fetch("/api/news")
+      .then(r => r.json())
+      .then(json => { if (json.success) setAnnouncements(json.data.slice(0, 3)) })
+      .catch(err => console.error("news fetch error:", err))
+      .finally(() => setNewsLoading(false))
+
+    // Fetch next 3 upcoming events
+    fetch("/api/events")
+      .then(r => r.json())
+      .then(json => { if (json.success) setEvents(json.data.slice(0, 3)) })
+      .catch(err => console.error("events fetch error:", err))
+      .finally(() => setEventsLoading(false))
   }, [])
 
   return (
@@ -81,21 +69,17 @@ export function AnnouncementsSection() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
           <div>
-            <p
-              className={cn(
-                "text-primary font-medium mb-2 transition-all duration-700",
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-              )}
-            >
+            <p className={cn(
+              "text-primary font-medium mb-2 transition-all duration-700",
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            )}>
               Stay Updated
             </p>
-            <h2
-              className={cn(
-                "font-serif text-3xl md:text-4xl font-bold text-foreground transition-all duration-700 delay-100",
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-              )}
-            >
-              News & Announcements
+            <h2 className={cn(
+              "font-serif text-3xl md:text-4xl font-bold text-foreground transition-all duration-700 delay-100",
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            )}>
+              News &amp; Announcements
             </h2>
           </div>
           <Button
@@ -114,12 +98,32 @@ export function AnnouncementsSection() {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Announcements */}
+          {/* Announcements Column */}
           <div className="lg:col-span-2 space-y-4">
-            {announcements.map((item, index) => (
+
+            {/* Skeletons */}
+            {newsLoading && [1, 2, 3].map(i => (
+              <div key={i} className="bg-card rounded-xl p-5 border border-border animate-pulse">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-muted rounded-lg shrink-0" />
+                  <div className="flex-1 space-y-2">
+                    <div className="flex gap-2">
+                      <div className="h-4 w-20 bg-muted rounded" />
+                      <div className="h-4 w-24 bg-muted rounded" />
+                    </div>
+                    <div className="h-4 w-3/4 bg-muted rounded" />
+                    <div className="h-3 w-full bg-muted rounded" />
+                    <div className="h-3 w-5/6 bg-muted rounded" />
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {/* News Cards */}
+            {!newsLoading && announcements.map((item, index) => (
               <Link
                 key={item.id}
-                href={`/news/${item.id}`}
+                href="/news"
                 className={cn(
                   "group block bg-card rounded-xl p-5 md:p-6 border border-border hover:border-primary/30 hover:shadow-md transition-all duration-500",
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
@@ -127,53 +131,52 @@ export function AnnouncementsSection() {
                 style={{ transitionDelay: `${(index + 3) * 100}ms` }}
               >
                 <div className="flex items-start gap-4">
-                  {/* Icon */}
                   <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
                     <Bell className="w-5 h-5 text-primary" />
                   </div>
-
                   <div className="flex-1 min-w-0">
-                    {/* Header */}
                     <div className="flex items-center gap-2 mb-2 flex-wrap">
                       <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">
                         {item.category}
                       </span>
-                      {item.isNew && (
+                      {item.is_new && (
                         <span className="text-xs font-medium text-accent bg-accent/10 px-2 py-1 rounded">
                           New
                         </span>
                       )}
                       <span className="text-xs text-muted-foreground flex items-center gap-1">
                         <Calendar className="w-3 h-3" />
-                        {item.date}
+                        {new Date(item.published_at).toLocaleDateString("en-IN", {
+                          day: "numeric", month: "short", year: "numeric"
+                        })}
                       </span>
                     </div>
-
-                    {/* Title */}
                     <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-2">
                       {item.title}
                     </h3>
-
-                    {/* Description */}
                     <p className="text-sm text-muted-foreground line-clamp-2">
-                      {item.description}
+                      {item.excerpt}
                     </p>
                   </div>
-
-                  {/* Arrow */}
                   <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0" />
                 </div>
               </Link>
             ))}
+
+            {/* Empty state */}
+            {!newsLoading && announcements.length === 0 && (
+              <div className="text-center py-12 text-muted-foreground">
+                <Bell className="w-8 h-8 mx-auto mb-2 opacity-30" />
+                <p className="text-sm">No announcements at this time.</p>
+              </div>
+            )}
           </div>
 
-          {/* Upcoming Events */}
-          <div
-            className={cn(
-              "bg-card rounded-xl border border-border p-6 transition-all duration-700 delay-500",
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            )}
-          >
+          {/* Upcoming Events Column */}
+          <div className={cn(
+            "bg-card rounded-xl border border-border p-6 transition-all duration-700 delay-500",
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          )}>
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center">
                 <Calendar className="w-5 h-5 text-accent" />
@@ -183,34 +186,63 @@ export function AnnouncementsSection() {
               </h3>
             </div>
 
-            <div className="space-y-4">
-              {upcomingEvents.map((event) => (
-                <div
-                  key={event.id}
-                  className="group flex items-start gap-4 p-3 rounded-lg hover:bg-secondary/50 transition-colors cursor-pointer"
-                >
-                  {/* Date Box */}
-                  <div className="w-14 h-14 bg-primary/10 rounded-lg flex flex-col items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                    <span className="text-lg font-bold text-primary group-hover:text-primary-foreground">
-                      {event.date.split(" ")[1].replace(",", "")}
-                    </span>
-                    <span className="text-xs text-primary/80 group-hover:text-primary-foreground/80 uppercase">
-                      {event.date.split(" ")[0].slice(0, 3)}
-                    </span>
+            {/* Skeletons */}
+            {eventsLoading && (
+              <div className="space-y-4">
+                {[1, 2, 3].map(i => (
+                  <div key={i} className="flex gap-4 p-3 animate-pulse">
+                    <div className="w-14 h-14 bg-muted rounded-lg shrink-0" />
+                    <div className="flex-1 space-y-2">
+                      <div className="h-4 bg-muted rounded w-3/4" />
+                      <div className="h-3 bg-muted rounded w-1/2" />
+                    </div>
                   </div>
+                ))}
+              </div>
+            )}
 
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-medium text-foreground group-hover:text-primary transition-colors">
-                      {event.title}
-                    </h4>
-                    <p className="text-sm text-muted-foreground flex items-center gap-1 mt-1">
-                      <Clock className="w-3 h-3" />
-                      {event.time}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            {/* Event Cards */}
+            {!eventsLoading && events.length > 0 && (
+              <div className="space-y-4">
+                {events.map((event) => {
+                  const dateObj = new Date(event.event_date)
+                  const day = dateObj.getUTCDate()
+                  const month = dateObj.toLocaleString("en", { month: "short" })
+                  return (
+                    <div
+                      key={event.id}
+                      className="group flex items-start gap-4 p-3 rounded-lg hover:bg-secondary/50 transition-colors cursor-pointer"
+                    >
+                      <div className="w-14 h-14 bg-primary/10 rounded-lg flex flex-col items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                        <span className="text-lg font-bold text-primary group-hover:text-primary-foreground">
+                          {day}
+                        </span>
+                        <span className="text-xs text-primary/80 group-hover:text-primary-foreground/80 uppercase">
+                          {month}
+                        </span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-medium text-foreground group-hover:text-primary transition-colors">
+                          {event.title}
+                        </h4>
+                        <p className="text-sm text-muted-foreground flex items-center gap-1 mt-1">
+                          <Clock className="w-3 h-3" />
+                          {formatTime(event.event_time)}
+                        </p>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            )}
+
+            {/* Empty state */}
+            {!eventsLoading && events.length === 0 && (
+              <div className="text-center py-8 text-muted-foreground">
+                <Calendar className="w-8 h-8 mx-auto mb-2 opacity-30" />
+                <p className="text-sm">No upcoming events.</p>
+              </div>
+            )}
 
             <Button asChild variant="ghost" className="w-full mt-4">
               <Link href="/news#events">

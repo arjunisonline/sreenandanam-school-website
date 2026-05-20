@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { Calendar, MapPin, Users, Award } from "lucide-react";
+import { Calendar, MapPin, Users, Award, UserCircle2 } from "lucide-react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 const milestones = [
@@ -37,9 +38,21 @@ const milestones = [
   },
 ];
 
+interface FamousVisitor {
+  id: string;
+  name: string;
+  designation: string;
+  description: string;
+  image_url: string | null;
+  visited_at: string;
+}
+
 export function HistorySection() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+
+  const [visitors, setVisitors] = useState<FamousVisitor[]>([]);
+  const [visitorsLoading, setVisitorsLoading] = useState(true);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -57,6 +70,23 @@ export function HistorySection() {
 
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    async function fetchVisitors() {
+      try {
+        const res = await fetch("/api/famous-visitors")
+        const json = await res.json()
+        if (json.success) {
+          setVisitors(json.data)
+        }
+      } catch (err) {
+        console.error("Failed to fetch famous visitors:", err)
+      } finally {
+        setVisitorsLoading(false)
+      }
+    }
+    fetchVisitors()
+  }, [])
 
   return (
     <section ref={sectionRef} className="py-16 md:py-24 bg-card">
@@ -224,38 +254,78 @@ export function HistorySection() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item, index) => (
-              <div
-                key={item}
-                className={cn(
-                  "bg-background rounded-2xl overflow-hidden border border-border hover:shadow-lg hover:border-primary/30 transition-all duration-500 group",
-                  isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-4",
-                )}
-                style={{ transitionDelay: `${(index + 2) * 100}ms` }}
-              >
-                <div className="aspect-[4/3] bg-muted relative overflow-hidden flex items-center justify-center">
-                  {/* Placeholder for visitor photo */}
-                  <Users className="w-12 h-12 text-muted-foreground/30" />
+          {/* Loading Skeletons */}
+          {visitorsLoading && (
+            <div className="grid md:grid-cols-3 gap-8">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="bg-background rounded-2xl overflow-hidden border border-border animate-pulse">
+                  <div className="aspect-[4/3] bg-muted" />
+                  <div className="p-6 space-y-3">
+                    <div className="h-5 bg-muted rounded w-3/4" />
+                    <div className="h-4 bg-muted rounded w-1/2" />
+                    <div className="h-3 bg-muted rounded w-full" />
+                    <div className="h-3 bg-muted rounded w-5/6" />
+                  </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="font-serif text-xl font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
-                    Notable Personality {item}
-                  </h3>
-                  <p className="text-sm text-primary font-medium mb-3">
-                    Designation / Title
-                  </p>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    Visited our school and interacted with the students, sharing inspiring stories and valuable life lessons.
-                  </p>
+              ))}
+            </div>
+          )}
+
+          {/* Visitor Cards */}
+          {!visitorsLoading && visitors.length > 0 && (
+            <div className="grid md:grid-cols-3 gap-8">
+              {visitors.map((visitor, index) => (
+                <div
+                  key={visitor.id}
+                  className={cn(
+                    "bg-background rounded-2xl overflow-hidden border border-border hover:shadow-lg hover:border-primary/30 transition-all duration-500 group",
+                    isVisible
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-4",
+                  )}
+                  style={{ transitionDelay: `${(index + 2) * 100}ms` }}
+                >
+                  <div className="aspect-[4/3] bg-muted relative overflow-hidden">
+                    {visitor.image_url ? (
+                      <Image
+                        src={visitor.image_url}
+                        alt={visitor.name}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <UserCircle2 className="w-16 h-16 text-muted-foreground/30" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-serif text-xl font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
+                      {visitor.name}
+                    </h3>
+                    <p className="text-sm text-primary font-medium mb-3">
+                      {visitor.designation}
+                    </p>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {visitor.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
+
+          {/* Empty State */}
+          {!visitorsLoading && visitors.length === 0 && (
+            <div className="text-center py-16 text-muted-foreground">
+              <UserCircle2 className="w-12 h-12 mx-auto mb-4 opacity-30" />
+              <p className="text-sm">No visitor records found.</p>
+            </div>
+          )}
         </div>
       </div>
     </section>
   );
 }
+

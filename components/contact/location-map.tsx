@@ -14,11 +14,11 @@ export function LocationMap() {
             Find Us
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-pretty">
-            We operate across two beautiful campuses in Parassala, providing the perfect 
+            We operate across two beautiful campuses in Parassala, providing the perfect
             environment for learning and growth at every stage.
           </p>
         </div>
-        
+
         <Tabs defaultValue="public" className="w-full">
           <div className="flex justify-center mb-10">
             <TabsList className="grid w-full max-w-md grid-cols-2 h-12">
@@ -34,7 +34,8 @@ export function LocationMap() {
                 <Card className="overflow-hidden h-full">
                   <CardContent className="p-0 h-full min-h-[400px]">
                     <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3948.4023477261156!2d77.1433!3d8.3317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMTknNTQuMSJOIDc3wrAwOCczNS45IkU!5e0!3m2!1sen!2sin!4v1699000000000!5m2!1sen!2sin"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d697.8303857203452!2d77.1469325909197!3d8.34992286597727!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05ab82b842d75f%3A0xc187a020e7d70a50!2sSreeNandanam%20Schools!5e0!3m2!1sen!2sin!4v1779260003260!5m2!1sen!2sin"
+
                       width="100%"
                       height="100%"
                       style={{ border: 0, minHeight: "400px" }}
@@ -42,12 +43,12 @@ export function LocationMap() {
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
                       title="Public School Location Map"
-                      className="grayscale hover:grayscale-0 transition-all duration-500"
+
                     />
                   </CardContent>
                 </Card>
               </div>
-              
+
               <div className="space-y-6">
                 <Card>
                   <CardContent className="p-6">
@@ -59,7 +60,7 @@ export function LocationMap() {
                         <h3 className="font-semibold text-foreground mb-2">Main Campus</h3>
                         <p className="text-sm text-muted-foreground">
                           Sree Nandanam Public School<br />
-                          Near Parassala Junction<br />
+                          Near KSRTC Depot, Kurumkutty<br />
                           Parassala, Thiruvananthapuram<br />
                           Kerala - 695502
                         </p>
@@ -67,7 +68,7 @@ export function LocationMap() {
                     </div>
                   </CardContent>
                 </Card>
-                
+
                 <Card>
                   <CardContent className="p-6">
                     <h3 className="font-semibold text-foreground mb-4">How to Reach Us</h3>
@@ -77,7 +78,7 @@ export function LocationMap() {
                         <div>
                           <p className="text-sm font-medium text-foreground">By Car</p>
                           <p className="text-xs text-muted-foreground">
-                            15 minutes from Parassala town center. Ample parking available.
+                            5 minutes from Parassala town center. Ample parking available.
                           </p>
                         </div>
                       </div>
@@ -86,22 +87,22 @@ export function LocationMap() {
                         <div>
                           <p className="text-sm font-medium text-foreground">By Bus</p>
                           <p className="text-xs text-muted-foreground">
-                            Regular KSRTC buses from Trivandrum. Stop: Parassala Junction.
+                            Regular KSRTC buses from Trivandrum. Stop: Kurumkutty, Walkable distance from bus stop.
                           </p>
                         </div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
-                
-                <Button 
-                  className="w-full" 
+
+                <Button
+                  className="w-full"
                   size="lg"
                   asChild
                 >
-                  <a 
-                    href="https://www.google.com/maps/dir//8.3317,77.1433" 
-                    target="_blank" 
+                  <a
+                    href="https://www.google.com/maps/dir//8.3317,77.1433"
+                    target="_blank"
                     rel="noopener noreferrer"
                   >
                     <Navigation className="w-4 h-4 mr-2" />
@@ -120,7 +121,7 @@ export function LocationMap() {
                   <CardContent className="p-0 h-full min-h-[400px]">
                     {/* Placeholder coordinates, slightly different from main campus to show it's another location */}
                     <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3948.4023477261156!2d77.1450!3d8.3300!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMTknNTQuMSJOIDc3wrAwOCczNS45IkU!5e0!3m2!1sen!2sin!4v1699000000000!5m2!1sen!2sin"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3947.614694481352!2d77.15104067501098!3d8.34102689169538!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05ab05de8a1d75%3A0x6f9b9fcd8c0a6786!2sSree%20Nandanam%20Kindergarten!5e0!3m2!1sen!2sin!4v1779259941013!5m2!1sen!2sin"
                       width="100%"
                       height="100%"
                       style={{ border: 0, minHeight: "400px" }}
@@ -128,12 +129,12 @@ export function LocationMap() {
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
                       title="Kindergarten Location Map"
-                      className="grayscale hover:grayscale-0 transition-all duration-500"
+
                     />
                   </CardContent>
                 </Card>
               </div>
-              
+
               <div className="space-y-6">
                 <Card>
                   <CardContent className="p-6">
@@ -145,7 +146,7 @@ export function LocationMap() {
                         <h3 className="font-semibold text-foreground mb-2">Kindergarten Campus</h3>
                         <p className="text-sm text-muted-foreground">
                           Sree Nandanam Kindergarten<br />
-                          Parassala Town<br />
+                          Near Mahadeva Temple<br />
                           Parassala, Thiruvananthapuram<br />
                           Kerala - 695502
                         </p>
@@ -153,7 +154,7 @@ export function LocationMap() {
                     </div>
                   </CardContent>
                 </Card>
-                
+
                 <Card>
                   <CardContent className="p-6">
                     <h3 className="font-semibold text-foreground mb-4">How to Reach Us</h3>
@@ -172,22 +173,22 @@ export function LocationMap() {
                         <div>
                           <p className="text-sm font-medium text-foreground">By Bus</p>
                           <p className="text-xs text-muted-foreground">
-                            Walking distance from Parassala main bus stand.
+                            Walking distance from Parassala Mahadeva Temple.
                           </p>
                         </div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
-                
-                <Button 
-                  className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground" 
+
+                <Button
+                  className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground"
                   size="lg"
                   asChild
                 >
-                  <a 
-                    href="https://www.google.com/maps/dir//8.3300,77.1450" 
-                    target="_blank" 
+                  <a
+                    href="https://www.google.com/maps/dir//8.3300,77.1450"
+                    target="_blank"
                     rel="noopener noreferrer"
                   >
                     <Navigation className="w-4 h-4 mr-2" />

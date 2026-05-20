@@ -16,10 +16,10 @@ export function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
+
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1500))
-    
+
     setIsSubmitting(false)
     setIsSubmitted(true)
   }
@@ -37,7 +37,7 @@ export function ContactForm() {
                 Thank You for Reaching Out!
               </h3>
               <p className="text-muted-foreground mb-6">
-                We have received your message and will get back to you within 24-48 hours. 
+                We have received your message and will get back to you within 24-48 hours.
                 For urgent inquiries, please call us directly.
               </p>
               <Button onClick={() => setIsSubmitted(false)} variant="outline">
@@ -59,10 +59,10 @@ export function ContactForm() {
               Send Us a Message
             </h2>
             <p className="text-muted-foreground mb-8 text-pretty">
-              Fill out the form below and our team will get back to you as soon as possible. 
+              Fill out the form below and our team will get back to you as soon as possible.
               We are here to answer your questions and help you with the admission process.
             </p>
-            
+
             <div className="bg-primary/5 rounded-xl p-6 border border-primary/10">
               <h3 className="font-semibold text-foreground mb-4">Quick Response Guarantee</h3>
               <ul className="space-y-3 text-sm text-muted-foreground">
@@ -81,7 +81,7 @@ export function ContactForm() {
               </ul>
             </div>
           </div>
-          
+
           <Card className="shadow-lg">
             <CardHeader>
               <CardTitle>Contact Form</CardTitle>
@@ -94,72 +94,77 @@ export function ContactForm() {
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name *</Label>
-                    <Input 
-                      id="firstName" 
-                      placeholder="Enter first name" 
-                      required 
+                    <Input
+                      id="firstName"
+
+                      required
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="lastName">Last Name *</Label>
-                    <Input 
-                      id="lastName" 
-                      placeholder="Enter last name" 
-                      required 
+                    <Input
+                      id="lastName"
+
+                      required
                     />
                   </div>
                 </div>
-                
+
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email Address *</Label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      placeholder="your@email.com" 
-                      required 
+                    <Label htmlFor="email">Email Address</Label>
+                    <Input
+                      id="email"
+                      type="email"
+
+
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input 
-                      id="phone" 
-                      type="tel" 
-                      placeholder="+91 00000 00000" 
+                    <Label htmlFor="phone">Phone Number *</Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      required
                     />
                   </div>
                 </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="subject">Subject *</Label>
-                  <Select required>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a subject" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="admission">Admission Inquiry</SelectItem>
-                      <SelectItem value="academic">Academic Information</SelectItem>
-                      <SelectItem value="fees">Fee Structure</SelectItem>
-                      <SelectItem value="transport">Transportation</SelectItem>
-                      <SelectItem value="feedback">Feedback</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                    </SelectContent>
-                  </Select>
+
+                <div className=" grid grid-cols-2 gap-4">
+                  <div className="space-y-2" >
+                    <Label htmlFor="subject">Subject *</Label>
+                    <Select required>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a subject" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="admission">Admission Inquiry</SelectItem>
+                        <SelectItem value="academic">Academic Information</SelectItem>
+                        <SelectItem value="fees">Fee Structure</SelectItem>
+                        <SelectItem value="transport">Transportation</SelectItem>
+                        <SelectItem value="feedback">Feedback</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Message *</Label>
+                    <Textarea
+                      id="message"
+                      placeholder="How can we help you?"
+                      rows={5}
+                      required
+                    />
+                  </div>
                 </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message *</Label>
-                  <Textarea 
-                    id="message" 
-                    placeholder="How can we help you?" 
-                    rows={5}
-                    required 
-                  />
-                </div>
-                
-                <Button 
-                  type="submit" 
-                  className="w-full" 
+
+
+
+                <Button
+                  type="submit"
+                  className="w-full"
                   size="lg"
                   disabled={isSubmitting}
                 >
