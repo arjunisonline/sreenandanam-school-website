@@ -6,7 +6,7 @@ import { NewsList } from "@/components/news/news-list"
 import { UpcomingEvents } from "@/components/news/upcoming-events"
 
 export const metadata: Metadata = {
-  title: "News & Announcements | SREE NANDANAM PUBLIC SCHOOL",
+  title: "News & Announcements",
   description: "Stay updated with the latest news, announcements, and upcoming events at SREE NANDANAM PUBLIC SCHOOL.",
 }
 

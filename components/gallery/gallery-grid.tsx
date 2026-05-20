@@ -5,33 +5,25 @@ import Image from "next/image"
 import { Camera, X, ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-const categories = [
-  { id: "all", label: "All Photos" },
-  { id: "events", label: "Events" },
-  { id: "classroom", label: "Classroom" },
-  { id: "activities", label: "Activities" },
-  { id: "sports", label: "Sports" },
-]
+interface GalleryImage {
+  id: string | number
+  category: string
+  title: string
+  description: string
+  image: string
+}
 
-const galleryImages = [
-  { id: 1, category: "classroom", title: "Interactive Learning Session", description: "Students engaged in group activities", image: "/images/classroom.jpg" },
-  { id: 2, category: "events", title: "Annual Day Celebration", description: "Cultural performances by students", image: "/images/cultural.jpg" },
-  { id: 3, category: "activities", title: "Art and Craft", description: "Creative expression through art", image: "/images/art-class.jpg" },
-  { id: 4, category: "sports", title: "Sports Day", description: "Students participating in athletic events", image: "/images/sports.jpg" },
-  { id: 5, category: "classroom", title: "Computer Lab Session", description: "Learning digital skills", image: "/images/computer-lab.jpg" },
-  { id: 6, category: "events", title: "Morning Assembly", description: "Flag hoisting and daily prayers", image: "/images/assembly.jpg" },
-  { id: 7, category: "activities", title: "Science Learning", description: "Hands-on science experiments", image: "/images/science.jpg" },
-  { id: 8, category: "classroom", title: "Library Reading", description: "Developing reading habits", image: "/images/library.jpg" },
-  { id: 9, category: "sports", title: "Outdoor Games", description: "Physical education activities", image: "/images/playground.jpg" },
-  { id: 10, category: "events", title: "School Campus", description: "Our beautiful learning environment", image: "/images/hero-school.jpg" },
-  { id: 11, category: "activities", title: "Creative Expression", description: "Art and craft sessions", image: "/images/art-class.jpg" },
-  { id: 12, category: "classroom", title: "Modern Classroom", description: "Interactive lessons in progress", image: "/images/classroom.jpg" },
-]
+
 
 export function GalleryGrid() {
   const [isVisible, setIsVisible] = useState(false)
   const [activeCategory, setActiveCategory] = useState("all")
-  const [selectedImage, setSelectedImage] = useState<number | null>(null)
+  const [selectedImage, setSelectedImage] = useState<string | number | null>(null)
+  const [images, setImages] = useState<GalleryImage[]>([])
+  const [categories, setCategories] = useState<{ id: string; label: string }[]>([
+    { id: "all", label: "All Photos" }
+  ])
+  const [loading, setLoading] = useState(true)
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -49,13 +41,46 @@ export function GalleryGrid() {
     }
 
     return () => observer.disconnect()
+  }, [loading])
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await fetch("/api/gallery")
+        const data = await response.json()
+        if (data.success && data.images && data.images.length > 0) {
+          setImages(data.images)
+
+          // Build dynamic categories based on returned database images
+          const uniqueCategories = data.images.map((img: any) => img.category)
+          const uniqueExtras = Array.from(new Set(uniqueCategories))
+          const mergedCategories = [
+            { id: "all", label: "All Photos" },
+            ...uniqueExtras.map((cat: any) => ({
+              id: cat.toLowerCase(),
+              label: cat.replace(/[-_]/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase())
+            }))
+          ]
+          setCategories(mergedCategories)
+        } else {
+          setImages([])
+        }
+      } catch (error) {
+        console.error("Failed to fetch gallery images:", error)
+        setImages([])
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchImages()
   }, [])
 
-  const filteredImages = activeCategory === "all" 
-    ? galleryImages 
-    : galleryImages.filter(img => img.category === activeCategory)
+  const filteredImages = activeCategory === "all"
+    ? images
+    : images.filter(img => img.category === activeCategory)
 
-  const currentImageIndex = selectedImage !== null 
+  const currentImageIndex = selectedImage !== null
     ? filteredImages.findIndex(img => img.id === selectedImage)
     : -1
 
@@ -83,6 +108,25 @@ export function GalleryGrid() {
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [selectedImage, currentImageIndex])
+
+  if (loading) {
+    return (
+      <section className="py-16 md:py-24 bg-card animate-pulse">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="h-9 w-24 bg-muted rounded-full" />
+            ))}
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div key={i} className="aspect-square bg-muted rounded-xl" />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section ref={sectionRef} className="py-16 md:py-24 bg-card">

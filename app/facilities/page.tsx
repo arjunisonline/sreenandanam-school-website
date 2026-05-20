@@ -5,7 +5,7 @@ import { PageHero } from "@/components/shared/page-hero";
 import { FacilitiesGrid } from "@/components/facilities/facilities-grid";
 
 export const metadata: Metadata = {
-  title: "Facilities | SREE NANDANAM PUBLIC SCHOOL",
+  title: "Facilities",
   description:
     "Explore our modern facilities including computer lab, library, playground, and well-equipped classrooms designed for effective learning.",
 };

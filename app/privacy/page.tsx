@@ -4,7 +4,7 @@ import { Footer } from "@/components/footer";
 import { PageHero } from "@/components/shared/page-hero";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | SREE NANDANAM PUBLIC SCHOOL",
+  title: "Privacy Policy",
   description: "Privacy Policy for Sree Nandanam Public School.",
 };
 

@@ -7,7 +7,7 @@ import { TeachingMethodology } from "@/components/academics/teaching-methodology
 import { CurriculumOverview } from "@/components/academics/curriculum-overview"
 
 export const metadata: Metadata = {
-  title: "Academics | SREE NANDANAM PUBLIC SCHOOL",
+  title: "Academics",
   description: "Explore our comprehensive academic programs from Class 1 to Class 7. English medium education with modern teaching methodologies and computer-aided learning.",
 }
 

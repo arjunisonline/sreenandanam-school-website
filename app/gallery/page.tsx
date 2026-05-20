@@ -5,7 +5,7 @@ import { PageHero } from "@/components/shared/page-hero"
 import { GalleryGrid } from "@/components/gallery/gallery-grid"
 
 export const metadata: Metadata = {
-  title: "Photo Gallery | SREE NANDANAM PUBLIC SCHOOL",
+  title: "Photo Gallery",
   description: "Explore photos from school events, activities, and daily life at SREE NANDANAM PUBLIC SCHOOL. See our students in action.",
 }
 

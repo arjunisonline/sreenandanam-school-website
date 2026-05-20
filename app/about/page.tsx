@@ -8,7 +8,7 @@ import { HeadTeacherMessage } from "@/components/about/head-teacher-message"
 import { ValuesSection } from "@/components/about/values-section"
 
 export const metadata: Metadata = {
-  title: "About Us | SREE NANDANAM PUBLIC SCHOOL",
+  title: "About Us",
   description: "Learn about SREE NANDANAM PUBLIC SCHOOL's history, vision, mission, and values. Established in 2003, we provide quality education in Parassala, Kerala.",
 }
 

@@ -1,8 +1,14 @@
+import { Metadata } from "next";
 import { PageHero } from "@/components/shared/page-hero";
 import { Mail, Briefcase, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
+
+export const metadata: Metadata = {
+  title: "Careers",
+  description: "Build your career at SREE NANDANAM PUBLIC SCHOOL. Explore our available job openings and opportunities to join our team of passionate educators.",
+};
 
 export default function CareersPage() {
   return (

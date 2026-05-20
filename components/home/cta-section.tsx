@@ -90,7 +90,7 @@ export function CTASection() {
               asChild
               size="lg"
               variant="outline"
-              className="text-base px-8 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+              className="text-base px-8 border-primary-foreground/30 text-primary-foreground bg-primary-foreground/10"
             >
               <Link href="/contact">Schedule a Visit</Link>
             </Button>
@@ -105,28 +105,32 @@ export function CTASection() {
                 : "opacity-0 translate-y-4",
             )}
           >
-            <a
-              href="tel:+919745433356"
-              className="flex items-center gap-2 text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-            >
-              <Phone className="w-5 h-5" />
-              <span>+919745433356</span>
-            </a>
-            <a
-              href="tel:+919745433356"
-              className="flex items-center gap-2 text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-            >
-              <Phone className="w-5 h-5" />
-              <span>+919745433357</span>
-            </a>
+            <Phone className="w-5 h-5 text-white" />
+            <div className="flex flex-col">
+              <a
+                href="tel:+919745433356"
+                className="flex items-center gap-2 text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+              >
+
+                <span>+91 9745433356</span>
+              </a>
+              <a
+                href="tel:+919745433356"
+                className="flex items-center gap-2 text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+              >
+
+                <span>+91 9745433357</span>
+              </a>
+            </div>
+
 
             <div className="w-px h-5 bg-primary-foreground/30 hidden sm:block" />
             <a
-              href="mailto:info@sreenandanam.edu"
+              href="mailto:sreenandadnamschools@gmail.com"
               className="flex items-center gap-2 text-primary-foreground/80 hover:text-primary-foreground transition-colors"
             >
               <Mail className="w-5 h-5" />
-              <span>info@sreenandanam.edu</span>
+              <span>sreenandandamschools@gmail.com</span>
             </a>
           </div>
         </div>
