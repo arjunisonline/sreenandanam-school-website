@@ -2,17 +2,17 @@
 
 import { useEffect, useState, useRef } from "react"
 import Link from "next/link"
-import { Bell, Calendar, ArrowRight, Clock } from "lucide-react"
+import { Calendar, ArrowRight, Clock, Megaphone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-interface NewsItem {
+interface Announcement {
   id: string
   title: string
-  category: string
-  excerpt: string
-  is_new: boolean
-  published_at: string
+  content: string
+  type: string
+  target_audience: string
+  published_date: string
 }
 
 interface Event {
@@ -33,9 +33,9 @@ export function AnnouncementsSection() {
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
 
-  const [announcements, setAnnouncements] = useState<NewsItem[]>([])
+  const [announcements, setAnnouncements] = useState<Announcement[]>([])
   const [events, setEvents] = useState<Event[]>([])
-  const [newsLoading, setNewsLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
   const [eventsLoading, setEventsLoading] = useState(true)
 
   useEffect(() => {
@@ -48,14 +48,12 @@ export function AnnouncementsSection() {
   }, [])
 
   useEffect(() => {
-    // Fetch latest 3 news items
-    fetch("/api/news")
+    fetch("/api/announcements")
       .then(r => r.json())
-      .then(json => { if (json.success) setAnnouncements(json.data.slice(0, 3)) })
-      .catch(err => console.error("news fetch error:", err))
-      .finally(() => setNewsLoading(false))
+      .then(json => { if (json.success) setAnnouncements(json.data) })
+      .catch(err => console.error("announcements fetch error:", err))
+      .finally(() => setLoading(false))
 
-    // Fetch next 3 upcoming events
     fetch("/api/events")
       .then(r => r.json())
       .then(json => { if (json.success) setEvents(json.data.slice(0, 3)) })
@@ -79,7 +77,7 @@ export function AnnouncementsSection() {
               "font-serif text-3xl md:text-4xl font-bold text-foreground transition-all duration-700 delay-100",
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             )}>
-              News &amp; Announcements
+              Announcements
             </h2>
           </div>
           <Button
@@ -91,7 +89,7 @@ export function AnnouncementsSection() {
             )}
           >
             <Link href="/news">
-              View All News
+              View All
               <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </Button>
@@ -100,9 +98,8 @@ export function AnnouncementsSection() {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Announcements Column */}
           <div className="lg:col-span-2 space-y-4">
-
             {/* Skeletons */}
-            {newsLoading && [1, 2, 3].map(i => (
+            {loading && [1, 2, 3].map(i => (
               <div key={i} className="bg-card rounded-xl p-5 border border-border animate-pulse">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-muted rounded-lg shrink-0" />
@@ -119,54 +116,50 @@ export function AnnouncementsSection() {
               </div>
             ))}
 
-            {/* News Cards */}
-            {!newsLoading && announcements.map((item, index) => (
-              <Link
+            {/* Announcement Cards */}
+            {!loading && announcements.map((item, index) => (
+              <div
                 key={item.id}
-                href="/news"
                 className={cn(
-                  "group block bg-card rounded-xl p-5 md:p-6 border border-border hover:border-primary/30 hover:shadow-md transition-all duration-500",
+                  "group bg-card rounded-xl p-5 md:p-6 border border-border border-l-4 border-l-accent hover:shadow-md transition-all duration-500",
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                 )}
                 style={{ transitionDelay: `${(index + 3) * 100}ms` }}
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
-                    <Bell className="w-5 h-5 text-primary" />
+                  <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center shrink-0">
+                    <Megaphone className="w-5 h-5 text-accent" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-2 flex-wrap">
-                      <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">
-                        {item.category}
+                      <span className="text-xs font-medium text-accent bg-accent/10 px-2 py-1 rounded capitalize">
+                        {item.type}
                       </span>
-                      {item.is_new && (
-                        <span className="text-xs font-medium text-accent bg-accent/10 px-2 py-1 rounded">
-                          New
-                        </span>
-                      )}
+                      <span className="text-xs font-medium text-muted-foreground bg-secondary px-2 py-1 rounded">
+                        {item.target_audience}
+                      </span>
                       <span className="text-xs text-muted-foreground flex items-center gap-1">
                         <Calendar className="w-3 h-3" />
-                        {new Date(item.published_at).toLocaleDateString("en-IN", {
+                        {new Date(item.published_date).toLocaleDateString("en-IN", {
                           day: "numeric", month: "short", year: "numeric"
                         })}
                       </span>
                     </div>
-                    <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-2">
+                    <h3 className="font-semibold text-foreground group-hover:text-accent transition-colors mb-2">
                       {item.title}
                     </h3>
                     <p className="text-sm text-muted-foreground line-clamp-2">
-                      {item.excerpt}
+                      {item.content}
                     </p>
                   </div>
-                  <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0" />
                 </div>
-              </Link>
+              </div>
             ))}
 
             {/* Empty state */}
-            {!newsLoading && announcements.length === 0 && (
+            {!loading && announcements.length === 0 && (
               <div className="text-center py-12 text-muted-foreground">
-                <Bell className="w-8 h-8 mx-auto mb-2 opacity-30" />
+                <Megaphone className="w-8 h-8 mx-auto mb-2 opacity-30" />
                 <p className="text-sm">No announcements at this time.</p>
               </div>
             )}
@@ -245,7 +238,7 @@ export function AnnouncementsSection() {
             )}
 
             <Button asChild variant="ghost" className="w-full mt-4">
-              <Link href="/news#events">
+              <Link href="/events">
                 View All Events
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>

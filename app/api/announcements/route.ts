@@ -1,29 +1,20 @@
 import { NextResponse } from "next/server"
 import { createClient } from "@supabase/supabase-js"
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     )
 
-    const { searchParams } = new URL(request.url)
-    const showAll = searchParams.get("all") === "true"
-
-    let query = supabase
-      .from("events")
+    const { data, error } = await supabase
+      .from("announcements")
       .select("*")
-
-    if (!showAll) {
-      query = query.gte("event_date", new Date().toISOString().split("T")[0])
-    }
-
-    const { data, error } = await query
-      .order("event_date", { ascending: showAll ? false : true })
+      .order("published_date", { ascending: false })
 
     if (error) {
-      console.error("Supabase events fetch error:", error)
+      console.error("Supabase announcements fetch error:", error)
       return NextResponse.json({ success: false, error: error.message }, { status: 500 })
     }
 

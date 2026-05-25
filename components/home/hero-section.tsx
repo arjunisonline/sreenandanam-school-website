@@ -91,13 +91,13 @@ export function HeroSection() {
           {/* Badge */}
           <div
             className={cn(
-              "inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-8 transition-all duration-700",
+              "inline-flex items-center gap-2 px-4 py-2 bg-white/15 text-white backdrop-blur-sm rounded-full text-sm font-medium mb-8 border border-white/20 transition-all duration-700",
               isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-4",
             )}
           >
-            <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+            <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
             Admissions Open for 2026-27
           </div>
 

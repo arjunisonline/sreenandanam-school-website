@@ -6,6 +6,7 @@ import { HistorySection } from "@/components/about/history-section"
 import { VisionMission } from "@/components/about/vision-mission"
 import { HeadTeacherMessage } from "@/components/about/head-teacher-message"
 import { ValuesSection } from "@/components/about/values-section"
+import { MentalHealthSection } from "@/components/about/mental-health-section"
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -21,6 +22,7 @@ export default function AboutPage() {
         <HistorySection />
         <VisionMission />
         <HeadTeacherMessage />
+        <MentalHealthSection />
         <ValuesSection />
       </main>
       <Footer />

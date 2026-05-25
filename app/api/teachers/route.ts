@@ -9,22 +9,26 @@ export async function GET(request: Request) {
     )
 
     const { searchParams } = new URL(request.url)
-    const showAll = searchParams.get("all") === "true"
+    const id = searchParams.get("id")
 
-    let query = supabase
-      .from("events")
-      .select("*")
-
-    if (!showAll) {
-      query = query.gte("event_date", new Date().toISOString().split("T")[0])
+    if (!id) {
+      return NextResponse.json({ success: false, error: "Teacher ID is required" }, { status: 400 })
     }
 
-    const { data, error } = await query
-      .order("event_date", { ascending: showAll ? false : true })
+
+    const { data, error } = await supabase
+      .from("teachers")
+      .select("*")
+      .ilike("teacherid", `${id.trim()}%`)
+      .maybeSingle()
 
     if (error) {
-      console.error("Supabase events fetch error:", error)
+      console.error("Supabase teacher fetch error:", error)
       return NextResponse.json({ success: false, error: error.message }, { status: 500 })
+    }
+
+    if (!data) {
+      return NextResponse.json({ success: false, error: "Teacher not found" }, { status: 404 })
     }
 
     return NextResponse.json({ success: true, data })

@@ -145,9 +145,9 @@ export function UpcomingEvents() {
           </div>
         )}
 
-        <button className="w-full mt-4 px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10 rounded-lg transition-colors">
+        <a href="/events" className="block w-full mt-4 px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10 rounded-lg transition-colors text-center">
           View All Events
-        </button>
+        </a>
       </div>
 
       {/* Quick Links */}

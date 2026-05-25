@@ -1,5 +1,13 @@
 import Link from "next/link";
-import { GraduationCap, MapPin, Phone, Mail, Clock, Facebook, Instagram, Youtube } from "lucide-react";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  Facebook,
+  Instagram,
+  Youtube,
+} from "lucide-react";
 
 const quickLinks = [
   { href: "/about", label: "About Us" },
@@ -98,10 +106,16 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <Phone className="w-4 h-4 mt-1 text-primary shrink-0" />
                 <div className="flex flex-col text-sm text-background/80">
-                  <a href="tel:+919745433356" className="hover:text-primary transition-colors">
+                  <a
+                    href="tel:+919745433356"
+                    className="hover:text-primary transition-colors"
+                  >
                     +91 97454 33356
                   </a>
-                  <a href="tel:+919745433357" className="hover:text-primary transition-colors">
+                  <a
+                    href="tel:+919745433357"
+                    className="hover:text-primary transition-colors"
+                  >
                     +91 97454 33357
                   </a>
                 </div>
@@ -130,7 +144,8 @@ export function Footer() {
               Stay Updated
             </h3>
             <p className="text-background/80 text-sm leading-relaxed mb-4">
-              Subscribe to receive the latest updates, calendar announcements, and event notifications.
+              Subscribe to receive the latest updates, calendar announcements,
+              and event notifications.
             </p>
             <div className="flex flex-col gap-2">
               <input
