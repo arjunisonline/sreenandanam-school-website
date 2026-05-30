@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Playfair_Display, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { SchemaOrg } from '@/components/seo/schema-org'
 import './globals.css'
 
 const playfair = Playfair_Display({ 
@@ -28,7 +29,10 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://sreenandanam.edu'),
+  metadataBase: new URL('https://sreenandanamschools.com'),
+  alternates: {
+    canonical: '/',
+  },
   icons: {
     icon: [
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
@@ -47,7 +51,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'SREE NANDANAM PUBLIC SCHOOL | Parassala, Kerala',
     description: 'Empowering students through quality education since 2008. Explore our campus, facilities, and academic excellence.',
-    url: 'https://sreenandanam.edu',
+    url: 'https://sreenandanamschools.com',
     siteName: 'Sree Nandanam Public School',
     locale: 'en_IN',
     type: 'website',
@@ -73,6 +77,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>
+        <SchemaOrg />
         {children}
         <Analytics />
       </body>

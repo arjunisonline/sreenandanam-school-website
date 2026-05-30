@@ -79,7 +79,7 @@ export default function PrivacyPolicyPage() {
               If you have any questions regarding this Privacy Policy, you may
               contact us at:
               <br />
-              <strong>Email:</strong> info@sreenandanam.edu
+              <strong>Email:</strong> info@sreenandanamschools.com
               <br />
               <strong>Phone:</strong> +91 XXXXX XXXXX
             </p>
